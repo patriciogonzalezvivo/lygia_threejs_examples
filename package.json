@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "@parcel/transformer-glsl": "2.7.0",
+    "parcel": "^2.7.0",
+    "vite-plugin-glsl": "^0.4.0"
+  },
+  "dependencies": {
+    "lil-gui": "^0.17.0",
+    "three": "^0.145.0"
+  }
+}
