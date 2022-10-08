@@ -26,12 +26,11 @@ void main (void) {
     vec2 pixel = 1.0/u_resolution.xy;
     vec2 st = v_texcoord;
 
-    vec2 mouse = u_mouse * pixel;
     vec2 dir = ( noised( vec3(st, u_time * 0.1) ).yz );
 
     float scale = 1.;
 
-    if (st.x > mouse.x)
+    if (st.x > 0.5)
         color = sampleBracketing(u_rockMossTex, st, dir, scale);
     else
         color = texture2D(u_rockMossTex, scale * rotate(st, dir));

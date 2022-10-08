@@ -6,9 +6,32 @@ import GUI from 'lil-gui';
 import vertex from "./glsl/default.vert";
 // import fragment from "./glsl/default.frag";
 // import fragment from "./glsl/animation_easing.frag";
-// import fragment from "./glsl/animation_sprite.frag";
+import fragment from "./glsl/animation_sprite.frag";
 // import fragment from "./glsl/color_dither.frag";
-import fragment from "./glsl/color_lut.frag";
+// import fragment from "./glsl/color_lut.frag";
+// import fragment from "./glsl/filter_bilateralBlur2D.frag";
+// import fragment from "./glsl/filter_boxBlur2D.frag";
+// import fragment from "./glsl/filter_gaussianBlur2D.frag";
+// import fragment from "./glsl/filter_noiseBlur2D.frag";
+// import fragment from "./glsl/filter_radialBlur2D.frag";
+// import fragment from "./glsl/filter_edge2D.frag";
+// import fragment from "./glsl/filter_fibonacciBokeh.frag";
+// import fragment from "./glsl/filter_kuwahara2D.frag";
+// import fragment from "./glsl/filter_laplacian2D.frag";
+// import fragment from "./glsl/filter_median2D.frag";
+// import fragment from "./glsl/filter_sharpen2D.frag";
+// import fragment from "./glsl/generative_random.frag";
+// import fragment from "./glsl/generative_cnoise.frag";
+// import fragment from "./glsl/generative_pnoise.frag";
+// import fragment from "./glsl/generative_snoise.frag";
+// import fragment from "./glsl/generative_voronoise.frag";
+// import fragment from "./glsl/generative_curl.frag";
+// import fragment from "./glsl/generative_noised.frag";
+// import fragment from "./glsl/generative_fbm.frag";
+// import fragment from "./glsl/generative_worley.frag";
+// import fragment from "./glsl/generative_voronoi.frag";
+// import fragment from "./glsl/sample_bracketing.frag";
+// import fragment from "./glsl/sample_untile.frag";
 
 export default class Sketch {
   constructor(options) {
@@ -115,8 +138,18 @@ export default class Sketch {
     this.img_sprite = loader.load( "assets/sprite_megaman.png" );
     this.img_noise = loader.load( "assets/noise_blue.png" );
     this.img_lut = loader.load( "assets/lut.png" );
+    
     this.img_rocks = loader.load( "assets/rocks.png" );
+    this.img_rocks.wrapS = THREE.RepeatWrapping;
+    this.img_rocks.wrapT = THREE.RepeatWrapping;
+    this.img_rocks.repeat.set( 4, 4 );
+    
     this.img_rock_moss = loader.load( "assets/rock_moss.jpg" );
+    this.img_rock_moss.wrapS = THREE.RepeatWrapping;
+    this.img_rock_moss.wrapT = THREE.RepeatWrapping;
+    this.img_rock_moss.repeat.set( 4, 4 );
+
+
 
     this.material = new THREE.ShaderMaterial({
       extensions: {
