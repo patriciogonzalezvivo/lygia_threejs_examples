@@ -1,10 +1,13 @@
 ## LYGIA examples for Three.js / Parcel / Vite
 
-```
-git clone --recursive 
+Clone the repo (make sure to include submodules!), install node dependencies and run parcel. 
 
 ```
-
+git clone --recursive https://github.com/patriciogonzalezvivo/lygia_threejs_examples.git
+cd lygia_threejs_examples
+yarn install
+yarn parcel index.html
+```
 
 ### Acknowledgment 
 
