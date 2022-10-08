@@ -2,15 +2,18 @@ import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
-import fragment from "./glsl/default.frag";
-import vertex from "./glsl/default.vert";
 import GUI from 'lil-gui';
-
+import vertex from "./glsl/default.vert";
+// import fragment from "./glsl/default.frag";
+// import fragment from "./glsl/animation_easing.frag";
+// import fragment from "./glsl/animation_sprite.frag";
+// import fragment from "./glsl/color_dither.frag";
+import fragment from "./glsl/color_lut.frag";
 
 export default class Sketch {
   constructor(options) {
     this.scene = new THREE.Scene();
-
+    
     this.container = options.dom;
     this.width = this.container.offsetWidth;
     this.height = this.container.offsetHeight;
@@ -20,37 +23,38 @@ export default class Sketch {
     this.renderer.setClearColor(0xeeeeee, 1); 
     this.renderer.physicallyCorrectLights = true;
     this.renderer.outputEncoding = THREE.sRGBEncoding;
-
+    
     this.container.appendChild(this.renderer.domElement);
-
+    
     this.camera = new THREE.PerspectiveCamera(
       70,
       this.width / this.height,
       0.001,
       1000
-    );
-
-    // var frustumSize = 10;
-    // var aspect = window.innerWidth / window.innerHeight;
-    // this.camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, -1000, 1000 );
-    this.camera.position.set(0, 0, 2);
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.time = 0;
-
-    this.dracoLoader = new DRACOLoader();
-    this.dracoLoader.setDecoderPath('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/js/libs/draco/'); // use a full url path
-    this.gltf = new GLTFLoader();
-    this.gltf.setDRACOLoader(this.dracoLoader);
-
-    this.isPlaying = true;
+      );
+      
+      // var frustumSize = 10;
+      // var aspect = window.innerWidth / window.innerHeight;
+      // this.camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, -1000, 1000 );
+      this.camera.position.set(0, 0, 2);
+      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+      this.time = 0;
+      
+      this.dracoLoader = new DRACOLoader();
+      this.dracoLoader.setDecoderPath('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/js/libs/draco/'); // use a full url path
+      this.gltf = new GLTFLoader();
+      this.gltf.setDRACOLoader(this.dracoLoader);
     
-    this.addObjects();
-    this.resize();
-    this.render();
-    this.setupResize();
-    // this.settings();
-  }
 
+      this.isPlaying = true;
+      
+      this.addObjects();
+      this.resize();
+      this.render();
+      this.setupResize();
+      // this.settings();
+    }
+    
   settings() {
     let that = this;
     this.settings = {
@@ -70,7 +74,6 @@ export default class Sketch {
     this.renderer.setSize(this.width, this.height);
     this.camera.aspect = this.width / this.height;
     
-
     // image cover
     this.imageAspect = 853/1280;
     let a1; let a2;
@@ -102,14 +105,31 @@ export default class Sketch {
 
   }
 
+  
+  
   addObjects() {
     let that = this;
+    
+    const loader = new THREE.TextureLoader();
+    this.img_danny = loader.load( "assets/danny.png" );
+    this.img_sprite = loader.load( "assets/sprite_megaman.png" );
+    this.img_noise = loader.load( "assets/noise_blue.png" );
+    this.img_lut = loader.load( "assets/lut.png" );
+    this.img_rocks = loader.load( "assets/rocks.png" );
+    this.img_rock_moss = loader.load( "assets/rock_moss.jpg" );
+
     this.material = new THREE.ShaderMaterial({
       extensions: {
         derivatives: "#extension GL_OES_standard_derivatives : enable"
       },
       side: THREE.DoubleSide,
       uniforms: {
+        u_tex0: this.img_danny,
+        u_spriteTex: this.img_sprite,
+        u_noiseTex: this.img_noise,
+        u_lutTex: this.img_lut,
+        u_rocksTex: this.img_rocks,
+        u_rockMossTex: this.img_rock_moss,
         u_time: { value: 0 },
         u_resolution: { value: new THREE.Vector2() },
       },
@@ -149,6 +169,12 @@ export default class Sketch {
     if (!this.isPlaying) return;
     this.time += 0.05;
     this.material.uniforms.u_time.value = this.time;
+    this.material.uniforms.u_spriteTex.value = this.img_sprite;
+    this.material.uniforms.u_noiseTex.value = this.img_noise;
+    this.material.uniforms.u_lutTex.value = this.img_lut;
+    this.material.uniforms.u_tex0.value = this.img_danny;
+    this.material.uniforms.u_rockMossTex.value = this.img_rock_moss;
+    this.material.uniforms.u_rocksTex.value = this.img_rocks;
     requestAnimationFrame(this.render.bind(this));
     this.renderer.render(this.scene, this.camera);
   }

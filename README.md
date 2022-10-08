@@ -6,7 +6,7 @@ Clone the repo (make sure to include submodules!), install node dependencies and
 git clone --recursive https://github.com/patriciogonzalezvivo/lygia_threejs_examples.git
 cd lygia_threejs_examples
 yarn install
-yarn parcel index.html
+yarn dev
 ```
 
 ### Acknowledgment 

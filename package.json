@@ -1,11 +1,52 @@
 {
+  "name": "lygia_threejs_examples",
+  "description": "LYGIA Examples for ThreeJS",
+  "author": "Patricio Gonzalez Vivo <patriciogonzalezvivo@gmail.com>",
+  "homepage": "https://github.com/patriciogonzalezvivo/lygia_threejs_examples",
+  "main": "src/main.js",
+  "version": "0.4.0",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patriciogonzalezvivo/lygia_threejs_examples.git"
+  },
+  "bugs": {
+    "url": "https://github.com/patriciogonzalezvivo/lygia_threejs_examples/issues"
+  },
+  "keywords": [
+    "vite",
+    "glsl",
+    "webgl",
+    "webgpu",
+    "vitejs",
+    "plugin",
+    "threejs",
+    "shaders",
+    "vite-plugin",
+    "glsl-shaders",
+    "webgl-shaders",
+    "webgpu-shaders"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build", 
+    "preview": "vite preview"
+  },
   "devDependencies": {
     "@parcel/transformer-glsl": "2.7.0",
     "parcel": "^2.7.0",
+    "parcel-plugin-vite": "^1.0.2",
+    "vite": "^3.1.6",
     "vite-plugin-glsl": "^0.4.0"
   },
   "dependencies": {
     "lil-gui": "^0.17.0",
     "three": "^0.145.0"
+  },
+  "engines": {
+    "node": ">= 14.18.0",
+    "npm": ">= 6.14.17"
   }
 }
