@@ -2,8 +2,8 @@ import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
-import fragment from "./glsl/fragment.glsl";
-import vertex from "./glsl/vertex.glsl";
+import fragment from "./glsl/default.frag";
+import vertex from "./glsl/default.vert";
 import GUI from 'lil-gui';
 
 
@@ -82,24 +82,20 @@ export default class Sketch {
       a2 = (this.height/this.width) / this.imageAspect;
     }
 
-    this.material.uniforms.resolution.value.x = this.width;
-    this.material.uniforms.resolution.value.y = this.height;
-    this.material.uniforms.resolution.value.z = a1;
-    this.material.uniforms.resolution.value.w = a2;
+    this.material.uniforms.u_resolution.value.x = this.width;
+    this.material.uniforms.u_resolution.value.y = this.height;
 
+    const dist  = this.camera.position.z;
+    const height = 1;
+    this.camera.fov = 2*(180/Math.PI)*Math.atan(height/(2*dist));
 
-    // optional - cover with quad
-    // const dist  = this.camera.position.z;
-    // const height = 1;
-    // this.camera.fov = 2*(180/Math.PI)*Math.atan(height/(2*dist));
-
-    // // if(w/h>1) {
-    // if(this.width/this.height>1){
-    //   this.plane.scale.x = this.camera.aspect;
-    //   // this.plane.scale.y = this.camera.aspect;
-    // } else{
-    //   this.plane.scale.y = 1/this.camera.aspect;
-    // }
+    // if(w/h>1) {
+    if(this.width/this.height>1){
+      this.plane.scale.x = this.camera.aspect;
+      // this.plane.scale.y = this.camera.aspect;
+    } else{
+      this.plane.scale.y = 1/this.camera.aspect;
+    }
 
     this.camera.updateProjectionMatrix();
 
@@ -114,8 +110,8 @@ export default class Sketch {
       },
       side: THREE.DoubleSide,
       uniforms: {
-        time: { value: 0 },
-        resolution: { value: new THREE.Vector4() },
+        u_time: { value: 0 },
+        u_resolution: { value: new THREE.Vector2() },
       },
       // wireframe: true,
       // transparent: true,
@@ -152,7 +148,7 @@ export default class Sketch {
   render() {
     if (!this.isPlaying) return;
     this.time += 0.05;
-    this.material.uniforms.time.value = this.time;
+    this.material.uniforms.u_time.value = this.time;
     requestAnimationFrame(this.render.bind(this));
     this.renderer.render(this.scene, this.camera);
   }
