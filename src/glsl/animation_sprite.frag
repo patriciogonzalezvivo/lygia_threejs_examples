@@ -12,13 +12,16 @@ uniform float       u_time;
 varying vec2        v_texcoord;
 
 #include "lygia/math/decimation.glsl"
+#include "lygia/space/ratio.glsl"
 #include "lygia/space/scale.glsl"
 #include "lygia/animation/spriteLoop.glsl"
+#include "lygia/draw/rect.glsl"
 
 void main (void) {
     vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
     vec2 pixel = 1.0/u_resolution.xy;
-    vec2 st = v_texcoord;
+    vec2 st = gl_FragCoord.xy * pixel;
+    st = ratio(st, u_resolution);
 
     vec2 grid = vec2(10., 7.0);
 
@@ -46,6 +49,7 @@ void main (void) {
     else
         color = spriteLoop(u_spriteTex, st, grid, 60., 65., time);
 
+    color.rgb *= rect(st, 1.0);
     color.a = 1.0;
 
     gl_FragColor = color;

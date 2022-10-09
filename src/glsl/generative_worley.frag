@@ -8,12 +8,14 @@ uniform float   u_time;
 
 varying vec2        v_texcoord;
 
+#include "lygia/space/ratio.glsl"
 #include "lygia/generative/worley.glsl"
 
 void main(void) {
     vec4 color = vec4(vec3(0.0), 1.0);
     vec2 pixel = 1.0/u_resolution.xy;
-    vec2 st = v_texcoord;
+    vec2 st = gl_FragCoord.xy * pixel;
+    st = ratio(st, u_resolution);
 
     float d2 = worley(vec2(st*10. + u_time));
     float d3 = worley(vec3(st*10., u_time));

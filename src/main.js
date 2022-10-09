@@ -3,7 +3,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import vertex from "./glsl/default.vert";
 // import fragment from "./glsl/default.frag";
 // import fragment from "./glsl/animation_easing.frag";
-import fragment from "./glsl/animation_sprite.frag";
+// import fragment from "./glsl/animation_sprite.frag";
 // import fragment from "./glsl/color_dither.frag";
 // import fragment from "./glsl/color_lut.frag";
 // import fragment from "./glsl/filter_bilateralBlur2D.frag";
@@ -28,7 +28,7 @@ import fragment from "./glsl/animation_sprite.frag";
 // import fragment from "./glsl/generative_worley.frag";
 // import fragment from "./glsl/generative_voronoi.frag";
 // import fragment from "./glsl/sample_bracketing.frag";
-// import fragment from "./glsl/sample_untile.frag";
+import fragment from "./glsl/sample_untile.frag";
 
 export default class Sketch {
   constructor(options) {
@@ -54,7 +54,7 @@ export default class Sketch {
     );
 
     this.camera.position.set(0, 0, 2);
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    // this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.time = 0;
 
     this.addObjects();
@@ -94,17 +94,19 @@ export default class Sketch {
     this.img_danny = loader.load("assets/danny.png");
     this.img_sprite = loader.load("assets/sprite_megaman.png");
     this.img_noise = loader.load("assets/noise_blue.png");
+
     this.img_lut = loader.load("assets/lut.png");
+    this.img_lut.generateMipmaps = false;
 
     this.img_rocks = loader.load("assets/rocks.png");
     this.img_rocks.wrapS = THREE.RepeatWrapping;
     this.img_rocks.wrapT = THREE.RepeatWrapping;
-    this.img_rocks.repeat.set(4, 4);
-
+    this.img_rocks.generateMipmaps = false;
+    
     this.img_rock_moss = loader.load("assets/rock_moss.jpg");
     this.img_rock_moss.wrapS = THREE.RepeatWrapping;
     this.img_rock_moss.wrapT = THREE.RepeatWrapping;
-    this.img_rock_moss.repeat.set(4, 4);
+    this.img_rock_moss.generateMipmaps = false;
 
     this.material = new THREE.ShaderMaterial({
       extensions: {

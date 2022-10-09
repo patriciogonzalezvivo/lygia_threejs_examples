@@ -13,6 +13,7 @@ varying vec2        v_texcoord;
 
 #include "lygia/math/const.glsl"
 #include "lygia/math/decimation.glsl"
+#include "lygia/space/ratio.glsl"
 #include "lygia/generative/noised.glsl"
 
 #define ARROWS_LINE_STYLE
@@ -24,7 +25,8 @@ varying vec2        v_texcoord;
 void main (void) {
     vec4 color = vec4(vec3(0.0), 1.0);
     vec2 pixel = 1.0/u_resolution.xy;
-    vec2 st = v_texcoord;
+    vec2 st = gl_FragCoord.xy * pixel;
+    st = ratio(st, u_resolution);
 
     vec2 dir = ( noised( vec3(st, u_time * 0.1) ).yz );
 

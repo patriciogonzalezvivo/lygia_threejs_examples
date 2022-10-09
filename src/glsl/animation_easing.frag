@@ -8,15 +8,17 @@ uniform float   u_time;
 
 varying vec2    v_texcoord;
 
-#include "lygia/draw/circle.glsl"
 #include "lygia/space/ratio.glsl"
 #include "lygia/space/scale.glsl"
 #include "lygia/animation/easing.glsl"
+#include "lygia/draw/circle.glsl"
+#include "lygia/draw/rect.glsl"
 
 void main(void) {
     vec3 color = vec3(0.0);
     vec2 pixel = 1.0/u_resolution.xy;
-    vec2 st = v_texcoord;
+    vec2 st = gl_FragCoord.xy * pixel;
+    st = ratio(st, u_resolution);
 
     float pct = fract(u_time * 0.25);
     st = scale(st, 1.1);
@@ -49,13 +51,13 @@ void main(void) {
     
     st.x -= pct;
 
-    st.y = fract(st.y * rows);
-    st = ratio(st, u_resolution);
+    st.y = fract(st.y * rows);;
     st = ratio(st, vec2(rows, 1.0));
 
     color += circle(st, 0.2) * step(0.0, row) * step(row, 9.);
     color *= step(0.1, st.y) * step(st.y, 0.9);
     
-    
+    // color.rgb *= rect(st, 1.0);
+
     gl_FragColor = vec4(color, 1.0);
 }
