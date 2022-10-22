@@ -11,11 +11,11 @@ uniform float       u_time;
 varying vec2        v_texcoord;
 
 #define MEDIAN_SAMPLER_FNC(POS_UV) texture2D(tex, clamp(POS_UV, vec2(0.01), vec2(0.99)))
-#include "lygia/filter/median.glsl"
-#include "lygia/space/ratio.glsl"
-#include "lygia/draw/digits.glsl"
-#include "lygia/draw/stroke.glsl"
-#include "lygia/draw/rect.glsl"
+#include "/filter/median.glsl"
+#include "/space/ratio.glsl"
+#include "/draw/digits.glsl"
+#include "/draw/stroke.glsl"
+#include "/draw/rect.glsl"
 
 void main (void) {
     vec3 color = vec3(0.0);

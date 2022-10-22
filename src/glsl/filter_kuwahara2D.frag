@@ -11,10 +11,10 @@ uniform float       u_time;
 varying vec2        v_texcoord;
 
 #define KUWAHARA_SAMPLER_FNC(POS_UV) texture2D(tex, clamp(POS_UV, vec2(0.01), vec2(0.99)))
-#include "lygia/filter/kuwahara.glsl"
-#include "lygia/space/ratio.glsl"
-#include "lygia/draw/digits.glsl"
-#include "lygia/draw/rect.glsl"
+#include "/filter/kuwahara.glsl"
+#include "/space/ratio.glsl"
+#include "/draw/digits.glsl"
+#include "/draw/rect.glsl"
 
 void main (void) {
     vec3 color = vec3(0.0);

@@ -10,9 +10,9 @@ uniform float       u_time;
 
 varying vec2        v_texcoord;
 
-#include "lygia/space/ratio.glsl"
-#include "lygia/filter/sharpen.glsl"
-#include "lygia/draw/rect.glsl"
+#include "/space/ratio.glsl"
+#include "/filter/sharpen.glsl"
+#include "/draw/rect.glsl"
 
 void main (void) {
     vec3 color = vec3(0.0);

@@ -11,11 +11,11 @@ uniform float       u_time;
 
 varying vec2        v_texcoord;
 
-#include "lygia/math/decimation.glsl"
-#include "lygia/space/ratio.glsl"
-#include "lygia/space/scale.glsl"
-#include "lygia/animation/spriteLoop.glsl"
-#include "lygia/draw/rect.glsl"
+#include "/math/decimation.glsl"
+#include "/space/ratio.glsl"
+#include "/space/scale.glsl"
+#include "/animation/spriteLoop.glsl"
+#include "/draw/rect.glsl"
 
 void main (void) {
     vec4 color = vec4(0.0, 0.0, 0.0, 1.0);

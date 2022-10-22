@@ -11,16 +11,16 @@ uniform float       u_time;
 
 varying vec2        v_texcoord;
 
-#include "lygia/math/const.glsl"
-#include "lygia/math/decimation.glsl"
-#include "lygia/space/ratio.glsl"
-#include "lygia/generative/noised.glsl"
+#include "/math/const.glsl"
+#include "/math/decimation.glsl"
+#include "/space/ratio.glsl"
+#include "/generative/noised.glsl"
 
 #define ARROWS_LINE_STYLE
-#include "lygia/draw/arrows.glsl"
+#include "/draw/arrows.glsl"
 
 #define TEXTUREBRACKETING_REPLACE_DIVERGENCE
-#include "lygia/sample/bracketing.glsl"
+#include "/sample/bracketing.glsl"
 
 void main (void) {
     vec4 color = vec4(vec3(0.0), 1.0);

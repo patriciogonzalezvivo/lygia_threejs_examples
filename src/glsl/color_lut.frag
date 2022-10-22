@@ -11,15 +11,15 @@ uniform float       u_time;
 
 varying vec2        v_texcoord;
 
-#include "lygia/space/ratio.glsl"
+#include "/space/ratio.glsl"
 
 #define LUT_SQUARE
 #define LUT_FLIP_Y
 #define LUT_CELL_SIZE 64.0
 #define LUT_CELLS_PER_SIDE 8.0
-#include "lygia/color/lut.glsl"
+#include "/color/lut.glsl"
 
-#include "lygia/draw/rect.glsl"
+#include "/draw/rect.glsl"
 
 void main(void) {
     vec4 color = vec4(0.0);

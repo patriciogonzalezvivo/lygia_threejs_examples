@@ -11,10 +11,10 @@ uniform float       u_time;
 varying vec2        v_texcoord;
 
 #define RADIALBLUR_SAMPLER_FNC(POS_UV) texture2D(tex, clamp(POS_UV, vec2(0.01), vec2(0.99)))
-#include "lygia/filter/radialBlur.glsl"
-#include "lygia/space/ratio.glsl"
-#include "lygia/math/decimation.glsl"
-#include "lygia/draw/digits.glsl"
+#include "/filter/radialBlur.glsl"
+#include "/space/ratio.glsl"
+#include "/math/decimation.glsl"
+#include "/draw/digits.glsl"
 
 void main (void) {
     vec3 color = vec3(0.0);

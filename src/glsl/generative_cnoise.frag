@@ -8,8 +8,8 @@ uniform float   u_time;
 
 varying vec2        v_texcoord;
 
-#include "lygia/space/ratio.glsl"
-#include "lygia/generative/cnoise.glsl"
+#include "/space/ratio.glsl"
+#include "/generative/cnoise.glsl"
 
 void main(void) {
     vec4 color = vec4(vec3(0.0), 1.0);

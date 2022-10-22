@@ -11,10 +11,10 @@ uniform float       u_time;
 varying vec2        v_texcoord;
 
 #define EDGE_SAMPLER_FNC(POS_UV) texture2D(tex, clamp(POS_UV, vec2(0.02), vec2(0.98))).r
-#include "lygia/filter/edge.glsl"
-#include "lygia/space/ratio.glsl"
-#include "lygia/draw/digits.glsl"
-#include "lygia/draw/rect.glsl"
+#include "/filter/edge.glsl"
+#include "/space/ratio.glsl"
+#include "/draw/digits.glsl"
+#include "/draw/rect.glsl"
 
 void main (void) {
     vec3 color = vec3(0.0);
